@@ -15,9 +15,9 @@ const Team = ({ parsedTeam }) => {
         <li>Total Combat: {}</li>
       </ul>
       <div className="row">
-        {parsedTeam.map((hero) => (
+        {/* {parsedTeam.map((hero) => (
           <Card key={hero.heroID} {...hero} />
-        ))}
+        ))} */}
       </div>
     </div>
   );

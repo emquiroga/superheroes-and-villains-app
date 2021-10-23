@@ -1,7 +1,16 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useContext } from "react";
+import { NavLink, useHistory } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext";
+import { authTypes } from "../../types/authTypes";
 
 const Navbar = () => {
+  const history = useHistory();
+  const { dispatch } = useContext(AuthContext);
+  const handleLogout = () => {
+    localStorage.setItem("token", JSON.stringify("no-token"));
+    dispatch({ type: authTypes.logout });
+    history.replace("/login");
+  };
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -18,7 +27,7 @@ const Navbar = () => {
           <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <NavLink
                 to="/home"
@@ -26,8 +35,7 @@ const Navbar = () => {
                 className="nav-link"
                 activeClassName="active text-info"
               >
-                {" "}
-                Home{" "}
+                Home
               </NavLink>
             </li>
             <li className="nav-item">
@@ -37,11 +45,15 @@ const Navbar = () => {
                 className="nav-link"
                 activeClassName="active text-info"
               >
-                {" "}
-                Hero finder{" "}
+                Hero finder
               </NavLink>
             </li>
           </ul>
+          <div className="d-flex">
+            <button className="btn btn-danger" onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
         </div>
       </div>
     </nav>

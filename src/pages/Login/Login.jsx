@@ -1,7 +1,12 @@
 import React from "react";
+import LoginForm from "../../components/LoginForm/LoginForm";
 
 const Login = () => {
-  return <div></div>;
+  return (
+    <div className="container-fluid mt-5">
+      <LoginForm />
+    </div>
+  );
 };
 
 export default Login;
