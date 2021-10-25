@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <div className="container-fluid">
       <h1 className="text-center">Home</h1>
-      <Team parsedTeam={parsedTeam} />
+      {parsedTeam && <Team parsedTeam={parsedTeam} />}
     </div>
   );
 };

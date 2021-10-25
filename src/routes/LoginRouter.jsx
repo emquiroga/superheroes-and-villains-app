@@ -9,12 +9,12 @@ import PrivateRoute from "./PrivateRoute";
 import AppRouter from "./AppRouter";
 
 const LoginRouter = () => {
-  const { log } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
   return (
     <Router>
       <Switch>
-        <PublicRoute path="/login" auth={log} component={Login} />
-        <PrivateRoute path="/" auth={log} component={AppRouter} />
+        <PublicRoute path="/login" auth={token} component={Login} />
+        <PrivateRoute path="/" auth={token} component={AppRouter} />
       </Switch>
     </Router>
   );

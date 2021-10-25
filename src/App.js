@@ -6,17 +6,17 @@ import { AuthContext } from './contexts/AuthContext'
 import { AuthReducer } from './reducers/AuthReducer'
 
 const init = () => {
-  return JSON.parse(localStorage.getItem("log")) || {log: false}
+  return JSON.parse(localStorage.getItem("token")) || "no-token"
 }
 const App = () => {
-  const [log, dispatch] = useReducer(AuthReducer, {}, init)
+  const [token, dispatch] = useReducer(AuthReducer, {}, init)
 
   useEffect(() => {
-    localStorage.setItem('log', JSON.stringify(log))
-  }, [log])
+    localStorage.setItem('token', JSON.stringify(token))
+  }, [token])
 
   return (
-    <AuthContext.Provider value={{log, dispatch}}>
+    <AuthContext.Provider value={{token, dispatch}}>
       <LoginRouter />
     </AuthContext.Provider>
   )

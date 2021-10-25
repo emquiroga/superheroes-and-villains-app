@@ -14,7 +14,7 @@ export async function setLogin({email, password}) {
             status : response.status,
             message : response.data
         }
-        localStorage.setItem("token", JSON.stringify(data.message.token))
+        localStorage.setItem("apiToken", JSON.stringify(data.message.token))
     }
     catch (error){
         let data = {

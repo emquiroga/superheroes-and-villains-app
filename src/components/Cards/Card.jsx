@@ -1,12 +1,20 @@
 import React from "react";
 import "./card.css";
 
-const Card = ({ heroName, url, stats, heroID, side, toggle, handleAdd }) => {
+const Card = ({
+  heroName,
+  url,
+  stats,
+  heroID,
+  side,
+  handleAdd,
+  handleRemove,
+}) => {
   return (
     <div className="main-container container">
       <div className="card col-12 col-md-4">
         <div className="front-card">
-          <img alt={heroName} src={url} className="card-img" />
+          <img alt={heroName} src={url} className="card-img" loading="lazy" />
           <p className="card-name">{heroName}</p>
         </div>
         <div className="back-card">
@@ -97,7 +105,11 @@ const Card = ({ heroName, url, stats, heroID, side, toggle, handleAdd }) => {
           >
             Add
           </button>
-          <button type="button" className="btn btn-danger">
+          <button
+            type="button"
+            className="btn btn-danger"
+            onClick={handleRemove}
+          >
             Remove
           </button>
           <button type="button" className="btn btn-info">

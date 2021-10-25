@@ -1,36 +1,21 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useFormik } from "formik";
 import { findHero } from "../../services/findHero";
+import { handleAddHero } from "../../helpers/handleAddHero";
 
 import Card from "../Cards/Card";
 
+const validate = (values) => {
+  const errors = {};
+  if (!values.search) {
+    errors.search = "Please enter a name";
+  }
+  return errors;
+};
+
 const SearchForm = () => {
   const [heroes, setHeroes] = useState([]);
-  const [team, setTeam] = useState([]);
 
-  // useEffect(() => {
-  //   localStorage.setItem("heroes", JSON.stringify(team));
-  // }, [team]);
-
-  // const handleAdd = ({ heroName, url, heroID, stats, side }) => {
-  //   let newMember = {
-  //     heroName,
-  //     url,
-  //     heroID,
-  //     stats,
-  //     side,
-  //   };
-  //   setTeam([...team, newMember]);
-  //   return team;
-  // };
-
-  const validate = (values) => {
-    const errors = {};
-    if (!values.search) {
-      errors.search = "Please enter a name";
-    }
-    return errors;
-  };
   const myForm = useFormik({
     initialValues: {
       search: "",
@@ -69,7 +54,7 @@ const SearchForm = () => {
       <h2 className="text-center">Results</h2>
       <div className="row">
         {heroes.map((heroe) => (
-          <Card key={heroe.heroID} {...heroe} />
+          <Card key={heroe.heroID} {...heroe} handleAdd={handleAddHero} />
         ))}
         {heroes.length === 0 && (
           <div className="alert alert-warning text-center">Heroe not found</div>

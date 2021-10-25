@@ -28,10 +28,10 @@ const myToken =
 const LoginForm = () => {
   const { dispatch } = useContext(AuthContext);
   const history = useHistory();
+
   const handleLogin = (values) => {
     setLogin(values);
-    const token = localStorage.getItem("token");
-    if (token.match(myToken)) {
+    if (localStorage.getItem("apiToken").match(myToken)) {
       dispatch({ type: authTypes.login });
       history.push("/");
     }
