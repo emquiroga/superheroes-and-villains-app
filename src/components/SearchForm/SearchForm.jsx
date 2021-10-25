@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { findHero } from "../../services/findHero";
 import { handleAddHero } from "../../helpers/handleAddHero";
 
-import Card from "../Cards/Card";
+import Cards from "../Cards/Cards";
 
 const validate = (values) => {
   const errors = {};
@@ -27,6 +27,8 @@ const SearchForm = () => {
   });
   return (
     <>
+      {" "}
+      <hr />
       <form className="login-form" noValidate onSubmit={myForm.handleSubmit}>
         <div className="input-group mb-3">
           <label htmlFor="search" className="w-100">
@@ -51,11 +53,10 @@ const SearchForm = () => {
           Search
         </button>
       </form>
-      <h2 className="text-center">Results</h2>
+      <hr />
+      <h2 className="text-center mt-2">Results</h2>
       <div className="row">
-        {heroes.map((heroe) => (
-          <Card key={heroe.heroID} {...heroe} handleAdd={handleAddHero} />
-        ))}
+        <Cards heroes={heroes} handleAddHero={handleAddHero} />
         {heroes.length === 0 && (
           <div className="alert alert-warning text-center">Heroe not found</div>
         )}

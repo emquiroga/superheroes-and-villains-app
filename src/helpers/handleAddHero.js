@@ -1,10 +1,12 @@
-export const handleAddHero = ({ heroName, url, heroID, stats, side }) => {
+export const handleAddHero = ({ heroName, url, heroID, stats, side, height, weight }) => {
     let newMember = {
       heroName,
       url,
       heroID,
       stats,
       side,
+      height, 
+      weight
     };
     const localHeroes = localStorage.getItem("heroes");
     if (localHeroes == null) {

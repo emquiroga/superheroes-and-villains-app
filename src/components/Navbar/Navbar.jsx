@@ -12,7 +12,7 @@ const Navbar = () => {
     history.replace("/login");
   };
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
         <h1 className="navbar-brand">Superheroes & Villains App</h1>
         <button

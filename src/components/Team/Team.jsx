@@ -1,24 +1,39 @@
-import React from "react";
-import Card from "../../components/Cards/Card";
+import React, { useEffect, useState } from "react";
+import Cards from "../Cards/Cards";
 import "./team.css";
 
-const Team = ({ parsedTeam }) => {
-  const totalInt = parsedTeam.map(
-    (parsedTeam) => parsedTeam.stats.intelligence
-  );
-  const totalStr = parsedTeam.map((parsedTeam) => parsedTeam.stats.strength);
-  const totalSpeed = parsedTeam.map((parsedTeam) => parsedTeam.stats.speed);
-  const totalDura = parsedTeam.map((parsedTeam) => parsedTeam.stats.durability);
-  const totalPwr = parsedTeam.map((parsedTeam) => parsedTeam.stats.power);
-  const totalCom = parsedTeam.map((parsedTeam) => parsedTeam.stats.combat);
+const Team = () => {
+  const [heroes, setHeroes] = useState([]);
 
-  const handleRemove = () => {
-    console.log(parsedTeam);
+  // const totalInt = heroes.map((heroes) => heroes.stats.intelligence);
+  // const totalStr = heroes.map((heroes) => heroes.stats.strength);
+  // const totalSpeed = heroes.map((heroes) => heroes.stats.speed);
+  // const totalDura = heroes.map((heroes) => heroes.stats.durability);
+  // const totalPwr = heroes.map((heroes) => heroes.stats.power);
+  // const totalCom = heroes.map((heroes) => heroes.stats.combat);
+
+  // const totalHeight = heroes.map((heroes) => heroes.height[1]);
+  // const totalWeight = heroes.map((heroes) => heroes.weight[1]);
+
+  // console.log(totalWeight, totalHeight);
+
+  useEffect(() => {
+    const myTeam = localStorage.getItem("heroes");
+    const parsedTeam = JSON.parse(myTeam);
+    setHeroes(parsedTeam);
+  }, []);
+
+  const handleRemoveHero = (id) => {
+    let updatedHeroes = [...heroes].filter((heroe) => heroe.heroID !== id);
+    const newHeroes = JSON.stringify(updatedHeroes);
+    localStorage.setItem("heroes", newHeroes);
+    setHeroes(newHeroes);
   };
 
   return (
     <div className="container-fluid text-center">
-      <h2 className="text-center text-info">Team Stats:</h2>
+      <hr />
+      {/* <h2 className="text-info">Team Stats:</h2>
       <ul className="totals-list">
         <li>
           Total Intelligence:{" "}
@@ -57,11 +72,14 @@ const Team = ({ parsedTeam }) => {
           </span>
         </li>
       </ul>
-      <div className="row">
-        {parsedTeam.map((hero) => (
-          <Card key={hero.heroID} {...hero} handleRemove={handleRemove} />
-        ))}
-      </div>
+      <hr />
+      <h2 className="text-info">Average stats: </h2>
+      <ul className="totals-list">
+        <li>Height:</li>
+        <li>Weight: </li>
+      </ul> */}
+      <hr />
+      <Cards heroes={heroes} handleRemoveHero={handleRemoveHero} />
     </div>
   );
 };

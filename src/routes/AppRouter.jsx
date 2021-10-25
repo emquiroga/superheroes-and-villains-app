@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
+import HeroScreen from "../pages/HeroScreen/HeroScreen";
 
 const Home = lazy(() => import("../pages/Home/Home"));
 const Login = lazy(() => import("../pages/Login/Login"));
@@ -23,6 +24,7 @@ const AppRouter = () => {
         <Switch>
           <Route exact path="/home" component={Home} />
           <Route exact path="/search" component={Search} />
+          <Route exact path="/character/:id" component={HeroScreen} />
           <Redirect to="/home" />
           <Route exact path="/login" component={Login} />
         </Switch>
