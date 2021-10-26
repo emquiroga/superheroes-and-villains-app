@@ -2,23 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./singlecard.css";
 
-const SingleCard = ({
-  heroName,
-  url,
-  stats,
-  heroID,
-  side,
-  height,
-  weight,
-  handleRemoveHero,
-  handleAddHero,
-}) => {
+const SingleCard = ({ hero, handleRemoveHero, handleAddHero }) => {
   return (
     <div className="main-container container">
       <div className="card col-12 col-md-4">
         <div className="front-card">
-          <img alt={heroName} src={url} className="card-img" loading="lazy" />
-          <p className="card-name">{heroName}</p>
+          <img
+            alt={hero.name}
+            src={hero.image.url}
+            className="card-img"
+            loading="lazy"
+          />
+          <p className="card-name">{hero.name}</p>
         </div>
         <div className="back-card container-fluid">
           <ul className="stats-list">
@@ -28,8 +23,8 @@ const SingleCard = ({
                 <div
                   className="progress-bar"
                   role="progressbar"
-                  style={{ width: `${stats.intelligence}%` }}
-                  aria-valuenow="25"
+                  style={{ width: `${hero.powerstats.intelligence}%` }}
+                  aria-valuenow={hero.powerstats.intelligence}
                   aria-valuemin="0"
                   aria-valuemax="100"
                 ></div>
@@ -41,8 +36,8 @@ const SingleCard = ({
                 <div
                   className="progress-bar"
                   role="progressbar"
-                  style={{ width: `${stats.strength}%` }}
-                  aria-valuenow={stats.strength}
+                  style={{ width: `${hero.powerstats.strength}%` }}
+                  aria-valuenow={hero.powerstats.strength}
                   aria-valuemin="0"
                   aria-valuemax="100"
                 ></div>
@@ -54,8 +49,8 @@ const SingleCard = ({
                 <div
                   className="progress-bar"
                   role="progressbar"
-                  style={{ width: `${stats.speed}%` }}
-                  aria-valuenow={stats.speed}
+                  style={{ width: `${hero.powerstats.speed}%` }}
+                  aria-valuenow={hero.powerstats.speed}
                   aria-valuemin="0"
                   aria-valuemax="100"
                 ></div>
@@ -67,8 +62,8 @@ const SingleCard = ({
                 <div
                   className="progress-bar"
                   role="progressbar"
-                  style={{ width: `${stats.durability}%` }}
-                  aria-valuenow={stats.durability}
+                  style={{ width: `${hero.powerstats.durability}%` }}
+                  aria-valuenow={hero.powerstats.durability}
                   aria-valuemin="0"
                   aria-valuemax="100"
                 ></div>
@@ -80,8 +75,8 @@ const SingleCard = ({
                 <div
                   className="progress-bar"
                   role="progressbar"
-                  style={{ width: `${stats.power}%` }}
-                  aria-valuenow={stats.power}
+                  style={{ width: `${hero.powerstats.power}%` }}
+                  aria-valuenow={hero.powerstats.power}
                   aria-valuemin="0"
                   aria-valuemax="100"
                 ></div>
@@ -93,41 +88,31 @@ const SingleCard = ({
                 <div
                   className="progress-bar"
                   role="progressbar"
-                  style={{ width: `${stats.combat}%` }}
-                  aria-valuenow={stats.combat}
+                  style={{ width: `${hero.powerstats.combat}%` }}
+                  aria-valuenow={hero.powerstats.combat}
                   aria-valuemin="0"
                   aria-valuemax="100"
                 ></div>
               </div>
             </li>
-            <li>Alignment: {side}</li>
+            <li>Alignment: {hero.biography.alignment}</li>
           </ul>
           <div className="d-grid gap-1">
             <button
               type="button"
               className="btn btn-success btn-sm"
-              onClick={() =>
-                handleAddHero({
-                  heroName,
-                  url,
-                  stats,
-                  heroID,
-                  side,
-                  height,
-                  weight,
-                })
-              }
+              onClick={() => handleAddHero(hero)}
             >
               Add
             </button>
             <button
               type="button"
               className="btn btn-danger btn-sm"
-              onClick={() => handleRemoveHero(heroID)}
+              onClick={() => handleRemoveHero(hero.id)}
             >
               Remove
             </button>
-            <Link className="card-link" to={`/character/id=${heroID}`}>
+            <Link className="card-link" to={`/character/id=${hero.id}`}>
               See more
             </Link>
           </div>

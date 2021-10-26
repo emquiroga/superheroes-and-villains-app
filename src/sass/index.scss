@@ -1,0 +1,10 @@
+//CONFIG
+@import "./config/variables.scss";
+@import "./config/mixins.scss";
+//PAGES
+@import "./pages/home";
+@import "./pages/login";
+@import "./pages/search";
+@import "./pages/heroscreen";
+//COMPONENTS
+@import "./components/loginform";

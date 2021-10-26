@@ -3,8 +3,10 @@ import LoginForm from "../../components/LoginForm/LoginForm";
 
 const Login = () => {
   return (
-    <div className="container-fluid mt-5">
-      <LoginForm />
+    <div className="login-page">
+      <div className="container-fluid form-container">
+        <LoginForm />
+      </div>
     </div>
   );
 };

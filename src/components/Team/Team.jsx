@@ -5,17 +5,32 @@ import "./team.css";
 const Team = () => {
   const [heroes, setHeroes] = useState([]);
 
-  // const totalInt = heroes.map((heroes) => heroes.stats.intelligence);
-  // const totalStr = heroes.map((heroes) => heroes.stats.strength);
-  // const totalSpeed = heroes.map((heroes) => heroes.stats.speed);
-  // const totalDura = heroes.map((heroes) => heroes.stats.durability);
-  // const totalPwr = heroes.map((heroes) => heroes.stats.power);
-  // const totalCom = heroes.map((heroes) => heroes.stats.combat);
+  // const totalInt = heroes.map((heroes) => heroes.powerstats.intelligence);
+  // const totalStr = heroes.map((heroes) => heroes.powerstats.strength);
+  // const totalSpeed = heroes.map((heroes) => heroes.powerstats.speed);
+  // const totalDura = heroes.map((heroes) => heroes.powerstats.durability);
+  // const totalPwr = heroes.map((heroes) => heroes.powerstats.power);
+  // const totalCom = heroes.map((heroes) => heroes.powerstats.combat);
 
-  // const totalHeight = heroes.map((heroes) => heroes.height[1]);
-  // const totalWeight = heroes.map((heroes) => heroes.weight[1]);
+  // const totalHeight = heroes.map((heroes) => heroes.appearance.height[1]);
+  // const totalWeight = heroes.map((heroes) => heroes.appearance.weight[1]);
 
-  // console.log(totalWeight, totalHeight);
+  const handleRemoveHero = (id) => {
+    let updatedHeroes = [...heroes].filter((hero) => hero.id !== id);
+    const newHeroes = JSON.stringify(updatedHeroes);
+    localStorage.setItem("heroes", newHeroes);
+    setHeroes(newHeroes);
+  };
+
+  const handleStats = (stat) => {
+    const stats = heroes
+      .map((hero) => {
+        return Number(hero.powerstats[stat]);
+      })
+      .reduce((a, b) => a + b);
+
+    console.log(stats);
+  };
 
   useEffect(() => {
     const myTeam = localStorage.getItem("heroes");
@@ -23,18 +38,11 @@ const Team = () => {
     setHeroes(parsedTeam);
   }, []);
 
-  const handleRemoveHero = (id) => {
-    let updatedHeroes = [...heroes].filter((heroe) => heroe.heroID !== id);
-    const newHeroes = JSON.stringify(updatedHeroes);
-    localStorage.setItem("heroes", newHeroes);
-    setHeroes(newHeroes);
-  };
-
   return (
     <div className="container-fluid text-center">
       <hr />
-      {/* <h2 className="text-info">Team Stats:</h2>
-      <ul className="totals-list">
+      <h2 className="text-info">Team Stats:</h2>
+      {/* <ul className="totals-list">
         <li>
           Total Intelligence:{" "}
           <span className="text-danger">
@@ -71,13 +79,13 @@ const Team = () => {
             {totalCom.map((i) => Number(i)).reduce((a, b) => a + b)}
           </span>
         </li>
-      </ul>
+      </ul> */}
       <hr />
       <h2 className="text-info">Average stats: </h2>
       <ul className="totals-list">
         <li>Height:</li>
         <li>Weight: </li>
-      </ul> */}
+      </ul>
       <hr />
       <Cards heroes={heroes} handleRemoveHero={handleRemoveHero} />
     </div>

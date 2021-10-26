@@ -15,7 +15,7 @@ const validate = (values) => {
 
 const SearchForm = () => {
   const [heroes, setHeroes] = useState([]);
-
+  console.log(heroes);
   const myForm = useFormik({
     initialValues: {
       search: "",
@@ -54,13 +54,16 @@ const SearchForm = () => {
         </button>
       </form>
       <hr />
-      <h2 className="text-center mt-2">Results</h2>
-      <div className="row">
-        <Cards heroes={heroes} handleAddHero={handleAddHero} />
-        {heroes.length === 0 && (
-          <div className="alert alert-warning text-center">Heroe not found</div>
-        )}
-      </div>
+      {heroes && (
+        <div className="row">
+          {" "}
+          <h2 className="text-center mt-2">Results</h2>{" "}
+          <Cards heroes={heroes} handleAddHero={handleAddHero} />{" "}
+        </div>
+      )}
+      {heroes === undefined && (
+        <div className="alert alert-warning text-center">Heroe not found</div>
+      )}
     </>
   );
 };

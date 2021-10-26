@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { useFormik } from "formik";
 
-import "./loginform.css";
 import { setLogin } from "../../services/setLogin";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useHistory } from "react-router";
@@ -58,7 +57,7 @@ const LoginForm = () => {
         autoComplete="off"
         onChange={loginForm.handleChange}
         value={loginForm.values.email}
-        className="form-control mb-3"
+        className="form-control mb-3 "
       />
       {loginForm.errors.email ? (
         <div className="mt-2 mb-2 text-danger">{loginForm.errors.email}</div>
@@ -72,12 +71,12 @@ const LoginForm = () => {
         id="password"
         onChange={loginForm.handleChange}
         value={loginForm.values.password}
-        className="form-control mb-3"
+        className="form-control mb-3 "
       />
       {loginForm.errors.password ? (
         <div className="mt-2 mb-2 text-danger">{loginForm.errors.password}</div>
       ) : null}
-      <button type="submit" className="btn btn-primary mt-3">
+      <button type="submit" className="btn btn-primary mt-3 w-100">
         Login
       </button>
       <div className="mt-5 text-center">

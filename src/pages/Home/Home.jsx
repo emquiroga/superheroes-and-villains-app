@@ -3,9 +3,11 @@ import Team from "../../components/Team/Team";
 
 const Home = () => {
   return (
-    <div className="container-fluid">
-      <h1 className="text-center mt-3">Home</h1>
-      <Team />
+    <div className="home-page">
+      <div className="container-fluid">
+        <h1 className="text-center text-white">Home</h1>
+        <Team />
+      </div>
     </div>
   );
 };

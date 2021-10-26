@@ -7,8 +7,8 @@ const Cards = ({ heroes, handleRemoveHero, handleAddHero }) => {
       {heroes &&
         heroes.map((hero) => (
           <SingleCard
-            key={hero.heroID}
-            {...hero}
+            key={hero.id}
+            hero={hero}
             handleRemoveHero={handleRemoveHero}
             handleAddHero={handleAddHero}
           />

@@ -7,7 +7,7 @@ const Navbar = () => {
   const history = useHistory();
   const { dispatch } = useContext(AuthContext);
   const handleLogout = () => {
-    localStorage.setItem("apiToken", JSON.stringify("no-token"));
+    localStorage.setItem("apiToken", false);
     dispatch({ type: authTypes.logout });
     history.replace("/login");
   };
