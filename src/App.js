@@ -1,12 +1,12 @@
 import {useEffect, useReducer} from 'react'
 
-import LoginRouter from './routes/LoginRouter'
+import AuthRouter from './routes/AuthRouter'
 
 import { AuthContext } from './contexts/AuthContext'
 import { AuthReducer } from './reducers/AuthReducer'
 
 const init = () => {
-  return JSON.parse(localStorage.getItem("token")) || "no-token"
+  return JSON.parse(localStorage.getItem("token")) || {token: null}
 }
 const App = () => {
   const [token, dispatch] = useReducer(AuthReducer, {}, init)
@@ -17,7 +17,7 @@ const App = () => {
 
   return (
     <AuthContext.Provider value={{token, dispatch}}>
-      <LoginRouter />
+      <AuthRouter />
     </AuthContext.Provider>
   )
 }

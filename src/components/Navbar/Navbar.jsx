@@ -1,20 +1,19 @@
 import React, { useContext } from "react";
 import { NavLink, useHistory } from "react-router-dom";
+import { authActions } from "../../actions/authActions";
 import { AuthContext } from "../../contexts/AuthContext";
-import { authTypes } from "../../types/authTypes";
 
 const Navbar = () => {
   const history = useHistory();
   const { dispatch } = useContext(AuthContext);
   const handleLogout = () => {
-    localStorage.setItem("apiToken", false);
-    dispatch({ type: authTypes.logout });
+    dispatch({ type: authActions.logout });
     history.replace("/login");
   };
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
-        <h1 className="navbar-brand">Superheroes & Villains App</h1>
+        <h1 className="navbar-title gradient-text">Superheroes & Villains</h1>
         <button
           className="navbar-toggler"
           type="button"

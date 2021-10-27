@@ -6,15 +6,25 @@
     max-width: 520px;
     margin: auto;
     padding: 1rem;
-    background-color: hsla(0, 0%, 0%, 0.5);
+    background-color: hsla(0, 0%, 0%, 0.8);
     border-radius: 1rem;
 
     label {
       color: white;
     }
+    input {
+      font-family: $font-primary;
+      background-color: hsla(0, 0%, 0%, 0.5);
+      color: lightblue;
+
+      &:focus {
+        background-color: hsla(0, 0%, 0%, 0.5);
+        color: lightblue;
+      }
+    }
 
     p {
-      color: white;
+      color: lightblue;
     }
   }
 }

@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <div className="home-page">
       <div className="container-fluid">
-        <h1 className="text-center text-white">Home</h1>
+        <h1 className="gradient-text">Your team</h1>
         <Team />
       </div>
     </div>

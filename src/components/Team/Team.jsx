@@ -1,93 +1,69 @@
-import React, { useEffect, useState } from "react";
-import Cards from "../Cards/Cards";
-import "./team.css";
+import React, { useContext } from "react";
+import SingleCard from "../SingleCard/SingleCard";
+
+import { HeroesContext } from "../../contexts/HeroesContext";
+import { heroesActions } from "../../actions/heroesActions";
+import { getSumOf } from "../../helpers/getSumOf";
 
 const Team = () => {
-  const [heroes, setHeroes] = useState([]);
-
-  // const totalInt = heroes.map((heroes) => heroes.powerstats.intelligence);
-  // const totalStr = heroes.map((heroes) => heroes.powerstats.strength);
-  // const totalSpeed = heroes.map((heroes) => heroes.powerstats.speed);
-  // const totalDura = heroes.map((heroes) => heroes.powerstats.durability);
-  // const totalPwr = heroes.map((heroes) => heroes.powerstats.power);
-  // const totalCom = heroes.map((heroes) => heroes.powerstats.combat);
-
-  // const totalHeight = heroes.map((heroes) => heroes.appearance.height[1]);
-  // const totalWeight = heroes.map((heroes) => heroes.appearance.weight[1]);
+  const [heroes, dispatch] = useContext(HeroesContext);
 
   const handleRemoveHero = (id) => {
-    let updatedHeroes = [...heroes].filter((hero) => hero.id !== id);
-    const newHeroes = JSON.stringify(updatedHeroes);
-    localStorage.setItem("heroes", newHeroes);
-    setHeroes(newHeroes);
+    dispatch({ type: heroesActions.remove, payload: id });
   };
 
-  const handleStats = (stat) => {
-    const stats = heroes
-      .map((hero) => {
-        return Number(hero.powerstats[stat]);
-      })
-      .reduce((a, b) => a + b);
+  const totalInt = getSumOf(heroes, ["powerstats", "intelligence"]);
+  const totalStr = getSumOf(heroes, ["powerstats", "strength"]);
+  const totalSpeed = getSumOf(heroes, ["powerstats", "speed"]);
+  const totalDura = getSumOf(heroes, ["powerstats", "durability"]);
+  const totalPwr = getSumOf(heroes, ["powerstats", "power"]);
+  const totalCom = getSumOf(heroes, ["powerstats", "combat"]);
+  const totalHeight = getSumOf(heroes, ["appearance", "height", "1"], {
+    formatter: (value) => value.slice(0, -3),
+  });
+  const totalWeight = getSumOf(heroes, ["appearance", "weight", "1"], {
+    formatter: (value) => value.slice(0, -3),
+  });
 
-    console.log(stats);
-  };
-
-  useEffect(() => {
-    const myTeam = localStorage.getItem("heroes");
-    const parsedTeam = JSON.parse(myTeam);
-    setHeroes(parsedTeam);
-  }, []);
+  const totalStats = [
+    { name: "Intelligence", value: totalInt },
+    { name: "Strength", value: totalStr },
+    { name: "Speed", value: totalSpeed },
+    { name: "Durability", value: totalDura },
+    { name: "Power", value: totalPwr },
+    { name: "Combat", value: totalCom },
+  ].sort((a, b) => b.value - a.value);
 
   return (
-    <div className="container-fluid text-center">
-      <hr />
-      <h2 className="text-info">Team Stats:</h2>
-      {/* <ul className="totals-list">
-        <li>
-          Total Intelligence:{" "}
-          <span className="text-danger">
-            {totalInt.map((i) => Number(i)).reduce((a, b) => a + b)}
-          </span>
-        </li>
-        <li>
-          Total Strength:{" "}
-          <span className="text-danger">
-            {totalStr.map((i) => Number(i)).reduce((a, b) => a + b)}
-          </span>
-        </li>
-        <li>
-          Total Speed:{" "}
-          <span className="text-danger">
-            {totalSpeed.map((i) => Number(i)).reduce((a, b) => a + b)}
-          </span>
-        </li>
-        <li>
-          Total Durability:{" "}
-          <span className="text-danger">
-            {totalDura.map((i) => Number(i)).reduce((a, b) => a + b)}
-          </span>
-        </li>
-        <li>
-          Total Power:{" "}
-          <span className="text-danger">
-            {totalPwr.map((i) => Number(i)).reduce((a, b) => a + b)}
-          </span>
-        </li>
-        <li>
-          Total Combat:{" "}
-          <span className="text-danger">
-            {totalCom.map((i) => Number(i)).reduce((a, b) => a + b)}
-          </span>
-        </li>
-      </ul> */}
-      <hr />
-      <h2 className="text-info">Average stats: </h2>
+    <div className="container text-center">
+      <h2 className="text-info">Average Stats:</h2>
       <ul className="totals-list">
-        <li>Height:</li>
-        <li>Weight: </li>
+        {totalStats.map(({ name, value }) => (
+          <li key={name}>
+            Total {name}: <span className="text-info">{value}</span>
+          </li>
+        ))}
       </ul>
-      <hr />
-      <Cards heroes={heroes} handleRemoveHero={handleRemoveHero} />
+      <ul className="totals-list">
+        <li>
+          Height: <span className="text-info">{totalHeight}</span> cm.
+        </li>
+        <li>
+          Weight: <span className="text-info">{totalWeight}</span> kg.
+        </li>
+      </ul>
+      <div className="row">
+        {heroes &&
+          heroes.map((hero) => (
+            <div className="col col-sm-6 " key={hero.id}>
+              <SingleCard
+                key={hero.id}
+                hero={hero}
+                handleRemoveHero={handleRemoveHero}
+              />
+            </div>
+          ))}
+      </div>
     </div>
   );
 };

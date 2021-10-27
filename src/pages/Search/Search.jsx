@@ -4,7 +4,12 @@ const Search = () => {
   return (
     <div className="search-page">
       <div className="container-fluid">
-        <h1 className="text-center">Hero finder</h1>
+        <div className="title-box">
+          <h1 className="search-title gradient-text">
+            Seek across the multiverse
+          </h1>
+        </div>
+
         <SearchForm />
       </div>
     </div>

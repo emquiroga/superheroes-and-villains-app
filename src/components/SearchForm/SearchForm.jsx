@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useFormik } from "formik";
 import { findHero } from "../../services/findHero";
-import { handleAddHero } from "../../helpers/handleAddHero";
 
-import Cards from "../Cards/Cards";
+import SingleCard from "../SingleCard/SingleCard";
+
+import { HeroesContext } from "../../contexts/HeroesContext";
+import { heroesActions } from "../../actions/heroesActions";
 
 const validate = (values) => {
   const errors = {};
@@ -14,22 +16,57 @@ const validate = (values) => {
 };
 
 const SearchForm = () => {
-  const [heroes, setHeroes] = useState([]);
-  console.log(heroes);
+  const [searchHeroes, setSearchHeroes] = useState([]);
+  const [teamOfHeroes, dispatch] = useContext(HeroesContext);
+
   const myForm = useFormik({
     initialValues: {
       search: "",
     },
     validate,
     onSubmit: (values) => {
-      findHero(setHeroes, values.search);
+      findHero(values.search)
+        .then((data) => {
+          setSearchHeroes(data);
+        })
+        .catch((err) => console.log(err));
     },
   });
+
+  const handleAddHero = (hero) => {
+    const teamSize = teamOfHeroes.length;
+
+    if (teamSize >= 6) {
+      alert("Reached maximum number of heroes");
+      return;
+    }
+
+    const numberOfVillains = teamOfHeroes.filter(
+      (hero) => hero.biography.alignment === "bad"
+    ).length;
+    const isBad = hero.biography.alignment === "bad";
+
+    if (numberOfVillains >= 3 && isBad) {
+      alert("Reached maximum number of villains");
+      return;
+    }
+
+    const numberOfHeroes = teamOfHeroes.filter(
+      (hero) => hero.biography.alignment === "good"
+    ).length;
+    const isGood = hero.biography.alignment === "good";
+
+    if (numberOfHeroes >= 3 && isGood) {
+      alert("Reached maximum number of heroes");
+      return;
+    }
+
+    dispatch({ type: heroesActions.add, payload: hero });
+  };
+
   return (
-    <>
-      {" "}
-      <hr />
-      <form className="login-form" noValidate onSubmit={myForm.handleSubmit}>
+    <div className="search-container">
+      <form className="search-form" noValidate onSubmit={myForm.handleSubmit}>
         <div className="input-group mb-3">
           <label htmlFor="search" className="w-100">
             <input
@@ -53,18 +90,22 @@ const SearchForm = () => {
           Search
         </button>
       </form>
-      <hr />
-      {heroes && (
+      <h2 className="text-center text-info mt-2">Results:</h2>
+      {searchHeroes && (
         <div className="row">
-          {" "}
-          <h2 className="text-center mt-2">Results</h2>{" "}
-          <Cards heroes={heroes} handleAddHero={handleAddHero} />{" "}
+          {searchHeroes.map((hero) => (
+            <SingleCard
+              key={hero.id}
+              hero={hero}
+              handleAddHero={handleAddHero}
+            />
+          ))}
         </div>
       )}
-      {heroes === undefined && (
+      {searchHeroes === null && (
         <div className="alert alert-warning text-center">Heroe not found</div>
       )}
-    </>
+    </div>
   );
 };
 

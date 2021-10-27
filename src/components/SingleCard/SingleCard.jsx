@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./singlecard.css";
 
 const SingleCard = ({ hero, handleRemoveHero, handleAddHero }) => {
   return (
@@ -98,20 +97,24 @@ const SingleCard = ({ hero, handleRemoveHero, handleAddHero }) => {
             <li>Alignment: {hero.biography.alignment}</li>
           </ul>
           <div className="d-grid gap-1">
-            <button
-              type="button"
-              className="btn btn-success btn-sm"
-              onClick={() => handleAddHero(hero)}
-            >
-              Add
-            </button>
-            <button
-              type="button"
-              className="btn btn-danger btn-sm"
-              onClick={() => handleRemoveHero(hero.id)}
-            >
-              Remove
-            </button>
+            {handleAddHero && (
+              <button
+                type="button"
+                className="btn btn-success btn-sm"
+                onClick={() => handleAddHero(hero)}
+              >
+                Add
+              </button>
+            )}
+            {handleRemoveHero && (
+              <button
+                type="button"
+                className="btn btn-danger btn-sm"
+                onClick={() => handleRemoveHero(hero.id)}
+              >
+                Remove
+              </button>
+            )}
             <Link className="card-link" to={`/character/id=${hero.id}`}>
               See more
             </Link>

@@ -1,0 +1,25 @@
+.search-container {
+  .search-form {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  h2 {
+    width: 500px;
+    margin: auto;
+    display: block;
+    font-weight: 500;
+    background-color: hsla(0, 0%, 0%, 0.5);
+    border-radius: 5px;
+    text-align: center;
+  }
+  input {
+    font-family: $font-primary;
+    background-color: hsla(0, 0%, 0%, 0.5);
+    color: lightblue;
+
+    &:focus {
+      background-color: hsla(0, 0%, 0%, 0.5);
+      color: lightblue;
+    }
+  }
+}

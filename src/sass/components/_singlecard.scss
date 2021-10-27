@@ -1,0 +1,99 @@
+.main-container {
+  position: relative;
+  width: 250px;
+  height: 380px;
+  margin: 2rem auto;
+  padding: 0;
+
+  .card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transition: transform 0.5s ease;
+    -webkit-transition: transform 0.5s ease;
+    -moz-transition: transform 0.5s ease;
+    -ms-transition: transform 0.5s ease;
+    -o-transition: transform 0.5s ease;
+
+    border-radius: 3px;
+    border: 2px inset white;
+
+    &:hover {
+      transform: rotateY(179deg);
+    }
+  }
+  .front-card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    background: hsla(0, 0%, 0%, 0.5);
+    color: #333;
+    border: none;
+
+    .card-img {
+      width: 100%;
+      height: 100%;
+    }
+    .card-name {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      position: absolute;
+      bottom: 0;
+      background-color: rgb(75, 31, 111);
+      color: white;
+      text-align: center;
+      font-size: 25px;
+      font-family: $font-primary;
+      z-index: 2;
+    }
+  }
+
+  .back-card {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    background: rgb(75, 31, 111);
+    background: linear-gradient(
+      180deg,
+      rgba(75, 31, 111, 1) 0%,
+      rgba(101, 101, 231, 1) 100%
+    );
+    color: white;
+    transform: rotateY(180deg);
+    border: none;
+    z-index: 3;
+
+    .stats-list {
+      flex-grow: 1;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-family: $font-primary;
+    }
+    a {
+      margin: auto;
+      width: 100%;
+      color: lightblue;
+      background-color: hsla(0, 0%, 0%, 0.7);
+      text-align: center;
+      font-size: 20px;
+      font-family: $font-primary;
+
+      &:hover {
+        color: white;
+        transition: all 150ms ease-in;
+      }
+    }
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,13 @@
+.navbar {
+  .navbar-title {
+    font-family: $font-secondary;
+    font-size: 1.2rem;
+
+    @include breakpoint-up(tablet) {
+      font-size: 1.75rem;
+    }
+  }
+  a {
+    font-family: $font-primary;
+  }
+}

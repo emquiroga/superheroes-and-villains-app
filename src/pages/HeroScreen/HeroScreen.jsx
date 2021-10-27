@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { displayHeroInfo } from "../../services/displayHeroInfo";
+import { getHeroInfo } from "../../services/getHeroInfo";
 
 const HeroScreen = ({ history }) => {
   const [info, setInfo] = useState(false);
@@ -7,36 +7,57 @@ const HeroScreen = ({ history }) => {
     history.goBack();
   };
   const currentID = window.location.href.split("=")[1];
+
   useEffect(() => {
-    displayHeroInfo(currentID, setInfo);
+    getHeroInfo(currentID)
+      .then((data) => {
+        setInfo(data);
+      })
+      .catch((err) => console.log(err));
   }, [currentID]);
 
   return (
-    <div className="heroscreen-page">
+    <div className="heroscreen-page d-flex justify-content-center">
       {info && (
-        <div className="container row">
-          <div className="col-8">
-            <img src={info.image.url} alt={info.id} className="img-thumbnail" />
-          </div>
-          <div className="col-4">
-            <ul className="heroscreen-list mt-5">
-              <li>Name: {info.name}</li>
-              <li>Full Name: {info.biography["full-name"]}</li>
-              <li>Alias: {info.biography.aliases}</li>
-              <li>Weight: {info.appearance.weight[1]} </li>
-              <li>Height: {info.appearance.height[1]}</li>
-              <li>Eyes color: {info.appearance["eye-color"]}</li>
-              <li>Hair color: {info.appearance["hair-color"]}</li>
-              <li>Job: {info.work.occupation}</li>
-            </ul>
-            <button
-              className="btn btn-outline-primary mt-2"
-              onClick={handleBack}
-            >
-              Go back
-            </button>
-          </div>
-        </div>
+        <>
+          <img src={info.image.url} alt={info.id} className="img-thumbnail" />
+
+          <ul className="heroscreen-list">
+            <li>
+              <span className="text-danger">Name:</span> {info.name}
+            </li>
+            <li>
+              <span className="text-danger">Full Name:</span>{" "}
+              {info.biography["full-name"]}
+            </li>
+            <li>
+              <span className="text-danger">Alias:</span>{" "}
+              {info.biography.aliases}
+            </li>
+            <li>
+              <span className="text-danger">Weight:</span>{" "}
+              {info.appearance.weight[1]}{" "}
+            </li>
+            <li>
+              <span className="text-danger">Height:</span>{" "}
+              {info.appearance.height[1]}
+            </li>
+            <li>
+              <span className="text-danger">Eyes color:</span>{" "}
+              {info.appearance["eye-color"]}
+            </li>
+            <li>
+              <span className="text-danger">Hair color:</span>{" "}
+              {info.appearance["hair-color"]}
+            </li>
+            <li>
+              <span className="text-danger">Job:</span> {info.work.occupation}
+            </li>
+          </ul>
+          <button className="btn btn-info mt-2" onClick={handleBack}>
+            Go back
+          </button>
+        </>
       )}
     </div>
   );

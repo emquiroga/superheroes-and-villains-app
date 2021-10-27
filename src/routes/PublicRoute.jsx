@@ -6,7 +6,7 @@ const PublicRoute = ({ auth, component: Component, ...rest }) => {
     <Route
       {...rest}
       component={(props) =>
-        !auth.log ? <Component {...props} /> : <Redirect to="/" />
+        !auth.token ? <Component {...props} /> : <Redirect to="/" />
       }
     />
   );

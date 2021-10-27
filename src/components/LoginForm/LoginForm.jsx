@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { useFormik } from "formik";
 
-import { setLogin } from "../../services/setLogin";
+import { login } from "../../services/login";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useHistory } from "react-router";
-import { authTypes } from "../../types/authTypes";
+import { authActions } from "../../actions/authActions";
 
 const validate = (values) => {
   const errors = {};
@@ -21,19 +21,20 @@ const validate = (values) => {
   return errors;
 };
 
-const myToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiZW1haWwiOiJjaGFsbGVuZ2VAYWxrZW15Lm9yZyIsImlhdCI6MTUxNjIzOTAyMn0.ilhFPrG0y7olRHifbjvcMOlH7q2YwlegT0f4aSbryBE";
-
 const LoginForm = () => {
   const { dispatch } = useContext(AuthContext);
   const history = useHistory();
 
-  const handleLogin = (values) => {
-    setLogin(values);
-    if (localStorage.getItem("apiToken").match(myToken)) {
-      dispatch({ type: authTypes.login });
-      history.push("/");
-    }
+  const handleLogin = async (values) => {
+    login(values)
+      .then((data) => {
+        dispatch({
+          type: authActions.login,
+          payload: { token: data.message.token },
+        });
+        history.push("/");
+      })
+      .catch((err) => console.log(err));
   };
 
   const loginForm = useFormik({
@@ -48,7 +49,7 @@ const LoginForm = () => {
   return (
     <form noValidate className="login-form" onSubmit={loginForm.handleSubmit}>
       <label htmlFor="email" className="form-label mb-3">
-        User Email:
+        User:
       </label>
       <input
         type="email"
@@ -63,7 +64,7 @@ const LoginForm = () => {
         <div className="mt-2 mb-2 text-danger">{loginForm.errors.email}</div>
       ) : null}
       <label htmlFor="password" className="form-label mb-3">
-        User Password:
+        Password:
       </label>
       <input
         type="password"
