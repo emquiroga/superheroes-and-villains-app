@@ -25,11 +25,9 @@ const SearchForm = () => {
     },
     validate,
     onSubmit: (values) => {
-      findHero(values.search)
-        .then((data) => {
-          setSearchHeroes(data);
-        })
-        .catch((err) => console.log(err));
+      findHero(values.search).then((data) => {
+        setSearchHeroes(data);
+      });
     },
   });
 
@@ -101,9 +99,6 @@ const SearchForm = () => {
             />
           ))}
         </div>
-      )}
-      {searchHeroes === null && (
-        <div className="alert alert-warning text-center">Heroe not found</div>
       )}
     </div>
   );

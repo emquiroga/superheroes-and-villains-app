@@ -49,7 +49,7 @@ const LoginForm = () => {
   return (
     <form noValidate className="login-form" onSubmit={loginForm.handleSubmit}>
       <label htmlFor="email" className="form-label mb-3">
-        User:
+        Email:
       </label>
       <input
         type="email"
@@ -81,7 +81,7 @@ const LoginForm = () => {
         Login
       </button>
       <div className="mt-5 text-center">
-        <p>User: challenge@alkemy.org</p>
+        <p>Email: challenge@alkemy.org</p>
         <p>Password: react</p>
       </div>
     </form>
