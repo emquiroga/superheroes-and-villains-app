@@ -1,5 +1,7 @@
 .navbar {
+  flex-grow: 1;
   .navbar-title {
+    margin: auto;
     font-family: $font-secondary;
     font-size: 1.2rem;
 
@@ -7,7 +9,11 @@
       font-size: 1.75rem;
     }
   }
-  a {
+  li {
     font-family: $font-primary;
+
+    @include breakpoint-up(large) {
+      padding: 0.5rem 1rem;
+    }
   }
 }

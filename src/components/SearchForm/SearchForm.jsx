@@ -90,14 +90,18 @@ const SearchForm = () => {
       </form>
       <h2 className="text-center text-info mt-2">Results:</h2>
       {searchHeroes && (
-        <div className="row">
-          {searchHeroes.map((hero) => (
-            <SingleCard
-              key={hero.id}
-              hero={hero}
-              handleAddHero={handleAddHero}
-            />
-          ))}
+        <div className="container">
+          <div className="row">
+            {searchHeroes.map((hero) => (
+              <div className="col" key={hero.id}>
+                <SingleCard
+                  key={hero.id}
+                  hero={hero}
+                  handleAddHero={handleAddHero}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>
