@@ -8,7 +8,7 @@
 - axios
 
 
-### La app se basa en la administración de un equipo de Superhéroes y Villanos mediante un llamado a [SuperHero API] (https://superheroapi.com/)
+### La app se basa en la administración de un equipo de Superhéroes y Villanos mediante un llamado a [SuperHero API](https://superheroapi.com/)
 
 ### Se consumen diferentes endpoints de la misma API para lograr búsquedas y detalles de personajes disponibles en la base de datos.
 
