@@ -1,6 +1,6 @@
 # React Challenge for Alkemy Labs
 
-### Esta app fue creada con Create-React-App como challenge de ingreso a [Alkemt](https://www.alkemy.org/)
+### Esta app fue creada con Create-React-App como challenge de ingreso a [Alkemy](https://www.alkemy.org/)
 
 ### En la misma se utilizan librerías como:
 - Formik
