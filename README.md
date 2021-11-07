@@ -12,6 +12,10 @@
 
 ### Se consumen diferentes endpoints de la misma API para lograr búsquedas y detalles de personajes disponibles en la base de datos.
 
+### Las peticiones se realizan a través de la librería axios. 
+
+### Las validaciones de formularios se realizan a través de la librería formik.
+
 ### La app realiza un display de héroes mediante un sistema grid y flex que permite consultar powerstats de los héroes en formato de Cards.
 
 ### Las rutas de la app se encuentran protegidas mediante un login que se valida a través de un token almacenado en el localStorage.
