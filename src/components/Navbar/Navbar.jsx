@@ -11,9 +11,9 @@ const Navbar = () => {
     history.replace("/login");
   };
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-lg navbar-dark text-white">
       <div className="container-fluid">
-        <h1 className="navbar-title gradient-text">Superheroes & Villains</h1>
+        <h1 className="navbar-title">Hero App</h1>
         <button
           className="navbar-toggler"
           type="button"
@@ -26,7 +26,7 @@ const Navbar = () => {
           <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+          <ul className="navbar-nav mb-2 mb-lg-0">
             <li className="nav-item">
               <NavLink
                 to="/home"
@@ -47,12 +47,12 @@ const Navbar = () => {
                 Hero finder
               </NavLink>
             </li>
+            <li className="nav-item">
+              <button className="btn-3" onClick={handleLogout}>
+                Logout
+              </button>
+            </li>
           </ul>
-          <div className="d-flex">
-            <button className="btn btn-danger" onClick={handleLogout}>
-              Logout
-            </button>
-          </div>
         </div>
       </div>
     </nav>

@@ -1,8 +1,8 @@
 const axios = require('axios');
-const myKey = "10224981963952367";
+const {REACT_APP_API_KEY} = process.env;
 
 export async function findHero (value) {
-    const apiURL = `https://www.superheroapi.com/api.php/${myKey}/search/${encodeURI(value)}`
+    const apiURL = `https://www.superheroapi.com/api.php/${REACT_APP_API_KEY}/search/${encodeURI(value)}`
     return axios.get(apiURL)
         .then((res) => res.data.results)
 }

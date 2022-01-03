@@ -78,30 +78,26 @@ const SearchForm = () => {
               autoComplete="off"
             />
             {myForm.errors.search ? (
-              <div className="text-center text-danger mt-2 mb-2">
+              <div className="text-center required-alert mt-2 mb-2">
                 {myForm.errors.search}
               </div>
             ) : null}
           </label>
         </div>
-        <button type="submit" className="btn btn-info search w-100">
+        <button type="submit" className="btn-1">
           Search
         </button>
       </form>
       <h2 className="text-center text-info mt-2">Results:</h2>
       {searchHeroes && (
-        <div className="container">
-          <div className="row">
-            {searchHeroes.map((hero) => (
-              <div className="col" key={hero.id}>
-                <SingleCard
-                  key={hero.id}
-                  hero={hero}
-                  handleAddHero={handleAddHero}
-                />
-              </div>
-            ))}
-          </div>
+        <div className="heroes-grid">
+          {searchHeroes.map((hero) => (
+            <SingleCard
+              key={hero.id}
+              hero={hero}
+              handleAddHero={handleAddHero}
+            />
+          ))}
         </div>
       )}
     </div>

@@ -52,9 +52,9 @@ const Team = () => {
           Weight: <span className="text-info">{totalWeight}</span> kg.
         </li>
       </ul>
-      <div className="row">
-        {heroes &&
-          heroes.map((hero) => (
+      {heroes && (
+        <div className="heroes-grid">
+          {heroes.map((hero) => (
             <div className="col col-sm-6 " key={hero.id}>
               <SingleCard
                 key={hero.id}
@@ -63,7 +63,8 @@ const Team = () => {
               />
             </div>
           ))}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

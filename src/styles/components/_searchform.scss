@@ -8,18 +8,18 @@
     margin: auto;
     display: block;
     font-weight: 500;
-    background-color: hsla(0, 0%, 0%, 0.5);
+    background-color: $color-1-t;
     border-radius: 5px;
     text-align: center;
   }
   input {
     font-family: $font-primary;
-    background-color: hsla(0, 0%, 0%, 0.5);
-    color: lightblue;
+    background-color: $color-1-t;
+    color: $color-2;
 
     &:focus {
-      background-color: hsla(0, 0%, 0%, 0.5);
-      color: lightblue;
+      background-color: $color-1-t;
+      color: $color-2;
     }
   }
 }

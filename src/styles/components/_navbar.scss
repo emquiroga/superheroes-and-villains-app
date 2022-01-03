@@ -1,0 +1,22 @@
+nav {
+  background-color: $color-1;
+  border-bottom: 2px solid $color-2;
+}
+.nav-item {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
+.navbar-title {
+  color: $color-2;
+}
+.navbar-collapse {
+  justify-content: flex-end;
+}
+.navbar-nav {
+  @media screen and (min-width: 992px) {
+    width: 50%;
+    max-width: 550px;
+    margin-left: auto;
+  } 
+}

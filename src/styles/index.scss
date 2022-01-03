@@ -1,6 +1,6 @@
 //CONFIG
 @import "./config/variables.scss";
-@import "./config/mixins.scss";
+@import "./config/globals.scss";
 @import "./config/helpers.scss";
 //PAGES
 @import "./pages/home";
@@ -8,7 +8,6 @@
 @import "./pages/search";
 @import "./pages/heroscreen";
 //COMPONENTS
-@import "./components/loginform";
 @import "./components/singlecard";
 @import "./components/team";
 @import "./components/navbar";
