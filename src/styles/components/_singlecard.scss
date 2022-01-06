@@ -1,11 +1,11 @@
-.main-container {
+.card-wrapper {
   position: relative;
   width: 250px;
   height: 380px;
   margin: 2rem auto;
   padding: 0;
 
-  .card {
+  .__card {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -25,20 +25,20 @@
       transform: rotateY(179deg);
     }
   }
-  .front-card {
+  .front__card {
     position: absolute;
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
-    background: hsla(0, 0%, 0%, 0.5);
+    background: $color-2-t;
     color: #333;
     border: none;
 
-    .card-img {
+    .card__img {
       width: 100%;
       height: 100%;
     }
-    .card-name {
+    .card__name {
       width: 100%;
       margin: 0;
       padding: 0;
@@ -53,7 +53,7 @@
     }
   }
 
-  .back-card {
+  .back__card {
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -71,14 +71,14 @@
     border: none;
     z-index: 3;
 
-    .stats-list {
+    .stats__list {
       flex-grow: 1;
       list-style: none;
       margin: 0;
       padding: 0;
       font-family: $font-primary;
     }
-    a {
+    .card__link {
       margin: auto;
       width: 100%;
       color: lightblue;

@@ -1,5 +1,5 @@
 //BUTTONS
-.btn-1 {
+.btn {
   width: 90%;
   margin: 1rem auto;
   padding: .375rem;
@@ -8,45 +8,43 @@
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  background-color: $color-1;
-  color: $color-2;
-  border: 1px solid $color-1;
   border-radius: 1.5rem;
   font-family: $font-primary;
   font-weight: 700;
   transition: all 150ms ease-in-out;
-
+}
+.btn-disabled {
+  opacity: .5;
+  pointer-events: none;
+}
+.btn-1 {
+  @extend .btn;
+  background-color: $color-1;
+  color: $color-2;
+  border: 1px solid $color-1;
+  
   &:hover {
     background-color: $color-1-t;
     color: $color-2-t;
   }
 }
 .btn-3 {
-  width: 90%;
-  margin: 1rem auto;
-  padding: .375rem;
-  max-width: 240px;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
+  @extend .btn;
   background-color: $color-3;
   color: $color-2;
   border: 1px solid $color-3;
-  border-radius: 1.5rem;
-  font-family: $font-primary;
-  font-weight: 700;
-  transition: all 150ms ease-in-out;
 
   &:hover {
-    background-color: $color-2-t;
-    color: $color-1;
+    background-color: $color-1;
+    color: $color-2;
+    border: 1px solid $color-2;
+
   }
 }
 
 //ALERTS
 .required-alert {
-  font-weight: 700;
+  font-weight: 500;
   color: red;
 }
 
@@ -54,4 +52,15 @@
 .heroes-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  @media screen and (min-width: 992px) {
+    gap: 2rem;
+  }
+}
+.form-container {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }

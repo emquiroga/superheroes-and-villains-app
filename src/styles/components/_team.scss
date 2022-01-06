@@ -1,23 +1,17 @@
-.home-page {
-  .container {
-    hr {
-      color: $color-2;
-    }
-    h2 {
-      color: $color-2;
-      font-family: $font-secondary;
-      margin: 2rem 0;
-    }
-    .totals-list {
-      max-width: 350px;
-      margin: 1rem auto;
-      padding: 1rem 0;
-      list-style: none;
-      font-family: $font-primary;
-      background-color: $color-1-t;
-      color: $color-2;
-      border-radius: 5px;
-    }
-  }
-  
+.team__title {
+  margin: 2rem auto;
+  color: $color-2;
+  font-family: $font-secondary;
+  text-align: center;
+}
+.totals__list {
+  max-width: 350px;
+  margin: 1rem auto;
+  padding: 1rem 0;
+  list-style: none;
+  font-family: $font-primary;
+  text-align: center;
+  background-color: $color-1-t;
+  color: $color-2;
+  border-radius: 5px;
 }

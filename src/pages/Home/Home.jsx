@@ -3,12 +3,12 @@ import Team from "../../components/Team/Team";
 
 const Home = () => {
   return (
-    <div className="home-page">
+    <section className="home-page">
       <div className="container">
-        <h1 className="text-white">Your team</h1>
+        <h1 className="main-title">Your team</h1>
         <Team />
       </div>
-    </div>
+    </section>
   );
 };
 

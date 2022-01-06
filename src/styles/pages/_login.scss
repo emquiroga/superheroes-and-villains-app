@@ -1,12 +1,6 @@
-.form-container {
-  width: 100%;
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-
-  .login-form {
+.login-page{
+  @extend .page-section;
+  .login__form {
     width: 80%;
     max-width: 420px;
     margin: 5rem auto 2rem auto;
@@ -14,25 +8,8 @@
     display: flex;
     flex-flow: column wrap;
     gap: 1rem;
-    background-color: $color-2;
+    background-color: $color-1;
     border-radius: 1rem;
-
-    label {
-      color: $color-1;
-      font-weight: 700;
-    }
-    input {
-      width: 100%;
-      font-family: $font-primary;
-      background-color: $color-3-t;
-      color: $color-1;
-
-      &:focus {
-        background-color: $color-2-t;
-        color: $color-1;
-        box-shadow: 0 0 0 0.25rem $color-1-t;
-      }
-    }
   }
 }
 

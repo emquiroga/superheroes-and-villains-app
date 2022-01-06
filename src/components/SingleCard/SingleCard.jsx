@@ -3,19 +3,14 @@ import { Link } from "react-router-dom";
 
 const SingleCard = ({ hero, handleRemoveHero, handleAddHero }) => {
   return (
-    <div className="main-container container">
-      <div className="card col-12 col-md-4">
-        <div className="front-card">
-          <img
-            alt={hero.name}
-            src={hero.image.url}
-            className="card-img"
-            loading="lazy"
-          />
-          <p className="card-name">{hero.name}</p>
+    <div className="card-wrapper">
+      <div className="__card">
+        <div className="front__card">
+          <img alt={hero.name} src={hero.image.url} className="card__img" />
+          <p className="card__name">{hero.name}</p>
         </div>
-        <div className="back-card container-fluid">
-          <ul className="stats-list">
+        <div className="back__card">
+          <ul className="stats__list">
             <li>
               Intelligence
               <div className="progress">
@@ -115,7 +110,7 @@ const SingleCard = ({ hero, handleRemoveHero, handleAddHero }) => {
                 Remove
               </button>
             )}
-            <Link className="card-link" to={`/character/id=${hero.id}`}>
+            <Link className="card__link" to={`/character/id=${hero.id}`}>
               See more
             </Link>
           </div>

@@ -47,50 +47,66 @@ const Login = () => {
     onSubmit: (values) => handleLogin(values),
   });
   return (
-    <div className="form-container">
-      <form noValidate className="login-form" onSubmit={loginForm.handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="email" className="form-label mb-3">
-            <span className="required-alert">*</span> Email:
-          </label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            autoComplete="off"
-            onChange={loginForm.handleChange}
-            value={loginForm.values.email}
-            className="form-control mb-3 "
-          />
-          {loginForm.errors.email ? (
-            <div className="mt-2 mb-2 required-alert">
-              {loginForm.errors.email}
-            </div>
-          ) : null}
-        </div>
-        <div className="form-group">
-          <label htmlFor="password" className="form-label mb-3">
-            <span className="required-alert">*</span> Password:
-          </label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            onChange={loginForm.handleChange}
-            value={loginForm.values.password}
-            className="form-control mb-3 "
-          />
-          {loginForm.errors.password ? (
-            <div className="mt-2 mb-2 required-alert">
-              {loginForm.errors.password}
-            </div>
-          ) : null}
-        </div>
-        <button type="submit" className="btn-3 mt-3">
-          Login
-        </button>
-      </form>
-    </div>
+    <section className="login-page">
+      <div className="form-container">
+        <form
+          noValidate
+          className="login__form"
+          onSubmit={loginForm.handleSubmit}
+        >
+          <div className="form-group">
+            <label htmlFor="email" className="form-label mb-3">
+              <span className="required-alert">*</span> Email:
+            </label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              autoComplete="off"
+              onChange={loginForm.handleChange}
+              value={loginForm.values.email}
+              className="form-control mb-3 "
+            />
+            {loginForm.errors.email ? (
+              <div className="mt-2 mb-2 required-alert">
+                {loginForm.errors.email}
+              </div>
+            ) : null}
+          </div>
+          <div className="form-group">
+            <label htmlFor="password" className="form-label mb-3">
+              <span className="required-alert">*</span> Password:
+            </label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              onChange={loginForm.handleChange}
+              value={loginForm.values.password}
+              className="form-control mb-3 "
+            />
+            {loginForm.errors.password ? (
+              <div className="mt-2 mb-2 required-alert">
+                {loginForm.errors.password}
+              </div>
+            ) : null}
+          </div>
+          <button
+            type="submit"
+            className={
+              loginForm.errors.email || loginForm.errors.password
+                ? "btn-3 mt-3 btn-disabled"
+                : "btn-3 mt-3"
+            }
+            disabled={Boolean(
+              loginForm.errors.email || loginForm.errors.password
+            )}
+          >
+            Login
+          </button>
+        </form>
+      </div>
+    </section>
   );
 };
 

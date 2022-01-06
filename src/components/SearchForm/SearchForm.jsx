@@ -19,7 +19,7 @@ const SearchForm = () => {
   const [searchHeroes, setSearchHeroes] = useState([]);
   const [teamOfHeroes, dispatch] = useContext(HeroesContext);
 
-  const myForm = useFormik({
+  const searchForm = useFormik({
     initialValues: {
       search: "",
     },
@@ -42,6 +42,7 @@ const SearchForm = () => {
     const numberOfVillains = teamOfHeroes.filter(
       (hero) => hero.biography.alignment === "bad"
     ).length;
+
     const isBad = hero.biography.alignment === "bad";
 
     if (numberOfVillains >= 3 && isBad) {
@@ -52,6 +53,7 @@ const SearchForm = () => {
     const numberOfHeroes = teamOfHeroes.filter(
       (hero) => hero.biography.alignment === "good"
     ).length;
+
     const isGood = hero.biography.alignment === "good";
 
     if (numberOfHeroes >= 3 && isGood) {
@@ -63,43 +65,57 @@ const SearchForm = () => {
   };
 
   return (
-    <div className="search-container">
-      <form className="search-form" noValidate onSubmit={myForm.handleSubmit}>
+    <div className="form-container">
+      <form
+        className="search-form"
+        noValidate
+        onSubmit={searchForm.handleSubmit}
+      >
         <div className="input-group mb-3">
           <label htmlFor="search" className="w-100">
             <input
               name="search"
               id="search"
-              value={myForm.values.search}
+              value={searchForm.values.search}
               type="text"
-              onChange={myForm.handleChange}
+              onChange={searchForm.handleChange}
               placeholder="Search your hero..."
               className="form-control w-100"
               autoComplete="off"
             />
-            {myForm.errors.search ? (
+            {searchForm.errors.search ? (
               <div className="text-center required-alert mt-2 mb-2">
-                {myForm.errors.search}
+                {searchForm.errors.search}
               </div>
             ) : null}
           </label>
         </div>
-        <button type="submit" className="btn-1">
+        <button
+          type="submit"
+          className={
+            searchForm.errors.search ? "btn-1 mt-3 btn-disabled" : "btn-1 mt-3"
+          }
+          disabled={Boolean(searchForm.errors.search)}
+        >
           Search
         </button>
       </form>
-      <h2 className="text-center text-info mt-2">Results:</h2>
-      {searchHeroes && (
-        <div className="heroes-grid">
-          {searchHeroes.map((hero) => (
-            <SingleCard
-              key={hero.id}
-              hero={hero}
-              handleAddHero={handleAddHero}
-            />
-          ))}
-        </div>
-      )}
+      <div className="container-fluid">
+        {searchHeroes.length > 0 ? (
+          <h2 className="sub-title">Results:</h2>
+        ) : null}
+        {searchHeroes && (
+          <div className="heroes-grid">
+            {searchHeroes.map((hero) => (
+              <SingleCard
+                key={hero.id}
+                hero={hero}
+                handleAddHero={handleAddHero}
+              />
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
