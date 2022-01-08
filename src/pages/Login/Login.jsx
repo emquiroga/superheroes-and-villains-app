@@ -55,6 +55,9 @@ const Login = () => {
           onSubmit={loginForm.handleSubmit}
         >
           <div className="form-group">
+            <h1 className="main-title">Welcome</h1>
+          </div>
+          <div className="form-group">
             <label htmlFor="email" className="form-label mb-3">
               <span className="required-alert">*</span> Email:
             </label>

@@ -1,1 +1,0 @@
-export const filterNullish = (value) => Boolean(value) && value !== 'null';

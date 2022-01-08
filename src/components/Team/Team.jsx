@@ -5,7 +5,6 @@ import SingleCard from "../SingleCard/SingleCard";
 
 import { HeroesContext } from "../../contexts/HeroesContext";
 import { heroesActions } from "../../actions/heroesActions";
-import { getSumOf } from "../../helpers/getSumOf";
 
 const Team = () => {
   const [heroes, dispatch] = useContext(HeroesContext);
@@ -13,6 +12,18 @@ const Team = () => {
   const handleRemoveHero = (id) => {
     dispatch({ type: heroesActions.remove, payload: id });
   };
+
+  const filterNullish = (value) => Boolean(value) && value !== "null";
+
+  const getProperty = (value, properties) =>
+    properties.reduce((soFar, property) => soFar[property] || {}, value);
+
+  const getSumOf = (list, properties, { formatter = (v) => v } = {}) =>
+    list
+      .map((value) => formatter(getProperty(value, properties)))
+      .filter(filterNullish)
+      .map(Number)
+      .reduce((a, b) => a + b, 0);
 
   const totalInt = getSumOf(heroes, ["powerstats", "intelligence"]);
   const totalStr = getSumOf(heroes, ["powerstats", "strength"]);

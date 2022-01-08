@@ -19,25 +19,25 @@
 }
 .btn-1 {
   @extend .btn;
-  background-color: $color-1;
-  color: $color-2;
-  border: 1px solid $color-1;
+  background-color: $color-primary;
+  color: $color-secondary;
+  border: 1px solid $color-primary;
   
   &:hover {
-    background-color: $color-1-t;
-    color: $color-2-t;
+    background-color: $color-primary;
+    color: $color-secondary;
   }
 }
 .btn-3 {
   @extend .btn;
-  background-color: $color-3;
-  color: $color-2;
-  border: 1px solid $color-3;
+  background-color: $color-accent;
+  color: $color-secondary;
+  border: 1px solid $color-accent;
 
   &:hover {
-    background-color: $color-1;
-    color: $color-2;
-    border: 1px solid $color-2;
+    background-color: $color-primary;
+    color: $color-secondary;
+    border: 1px solid $color-secondary;
 
   }
 }
@@ -45,7 +45,7 @@
 //ALERTS
 .required-alert {
   font-weight: 500;
-  color: red;
+  color: $red;
 }
 
 //DISPLAY
