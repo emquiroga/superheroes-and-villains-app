@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useFormik } from "formik";
+import axios from "axios";
 
-import { login } from "../../services/login";
+// import { login } from "../../services/login";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useHistory } from "react-router";
 import { authActions } from "../../actions/authActions";
@@ -23,8 +24,23 @@ const validate = (values) => {
 };
 
 const Login = () => {
+  const [error, setError] = useState(null);
   const { dispatch } = useContext(AuthContext);
   const history = useHistory();
+
+  const { REACT_POST_URL } = process.env;
+
+  async function login({ email, password }) {
+    const response = await axios.post(REACT_POST_URL, {
+      email: email,
+      password: password,
+    });
+    let data = {
+      status: response.status,
+      message: response.data,
+    };
+    return data;
+  }
 
   const handleLogin = (values) => {
     login(values)
@@ -35,7 +51,7 @@ const Login = () => {
         });
         history.push("/");
       })
-      .catch((err) => alert(`Error: ${err}`));
+      .catch((error) => setError(error));
   };
 
   const loginForm = useFormik({
@@ -46,6 +62,17 @@ const Login = () => {
     validate,
     onSubmit: (values) => handleLogin(values),
   });
+
+  if (error) {
+    return (
+      <div role="alert" className="alert alert-danger">
+        There was an error:{" "}
+        <pre style={{ whiteSpace: "normal" }}>{error.message}</pre>
+        Please refresh the window (F5)
+      </div>
+    );
+  }
+
   return (
     <section className="login-page">
       <div className="form-container">
