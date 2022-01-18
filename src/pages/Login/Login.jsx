@@ -7,6 +7,8 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { useHistory } from "react-router";
 import { authActions } from "../../actions/authActions";
 
+const { REACT_APP_POST_URL } = process.env;
+
 const validate = (values) => {
   const errors = {};
   if (!values.email) {
@@ -28,31 +30,30 @@ const Login = () => {
   const { dispatch } = useContext(AuthContext);
   const history = useHistory();
 
-  const { REACT_POST_URL } = process.env;
-
-  async function login({ email, password }) {
-    const response = await axios.post(REACT_POST_URL, {
-      email: email,
-      password: password,
-    });
-    let data = {
-      status: response.status,
-      message: response.data,
-    };
-    return data;
-  }
-
-  const handleLogin = (values) => {
-    login(values)
-      .then((data) => {
+  function login({ email, password }) {
+    axios
+      .post(REACT_APP_POST_URL, {
+        email: email,
+        password: password,
+      })
+      .then((res) => {
+        const { data } = res;
         dispatch({
           type: authActions.login,
-          payload: { token: data.message.token },
+          payload: { token: data.token },
         });
         history.push("/");
       })
       .catch((error) => setError(error));
-  };
+  }
+
+  function handleLogin(values) {
+    login(values);
+  }
+
+  function handleReset() {
+    history.replace("/login");
+  }
 
   const loginForm = useFormik({
     initialValues: {
@@ -65,11 +66,17 @@ const Login = () => {
 
   if (error) {
     return (
-      <div role="alert" className="alert alert-danger">
-        There was an error:{" "}
-        <pre style={{ whiteSpace: "normal" }}>{error.message}</pre>
-        Please refresh the window (F5)
-      </div>
+      <section className="login-page">
+        <div className="container mt-3">
+          <div role="alert" className="alert alert-danger">
+            There was an error:{" "}
+            <pre style={{ whiteSpace: "normal" }}>{error.message}</pre>
+            <button className="btn btn-danger" onClick={handleReset}>
+              Go back
+            </button>
+          </div>
+        </div>
+      </section>
     );
   }
 
