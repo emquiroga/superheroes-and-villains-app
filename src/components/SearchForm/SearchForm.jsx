@@ -18,7 +18,6 @@ const validate = (values) => {
 const SearchForm = () => {
   const [searchHeroes, setSearchHeroes] = useState([]);
   const [teamOfHeroes, dispatch] = useContext(HeroesContext);
-
   const searchForm = useFormik({
     initialValues: {
       search: "",
@@ -101,10 +100,8 @@ const SearchForm = () => {
         </button>
       </form>
       <div className="container-fluid">
-        {searchHeroes.length > 0 ? (
-          <h2 className="sub-title">Results:</h2>
-        ) : null}
-        {searchHeroes && (
+        <h2 className="sub-title">Results:</h2>
+        {searchHeroes.length > 1 && (
           <div className="heroes-grid">
             {searchHeroes.map((hero) => (
               <SingleCard
