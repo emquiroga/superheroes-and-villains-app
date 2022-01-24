@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
 
+// import { login } from "../../services/login";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useHistory } from "react-router";
 import { authActions } from "../../actions/authActions";
@@ -46,7 +47,7 @@ const Login = () => {
       .catch((error) => setError(error));
   }
 
-  function handleLogin(e, values) {
+  function handleLogin(values) {
     login(values);
   }
 
