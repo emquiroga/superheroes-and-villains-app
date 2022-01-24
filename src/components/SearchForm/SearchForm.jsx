@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { useFormik } from "formik";
 import { findHero } from "../../services/findHero";
 
@@ -18,16 +18,6 @@ const validate = (values) => {
 const SearchForm = () => {
   const [searchHeroes, setSearchHeroes] = useState([]);
   const [teamOfHeroes, dispatch] = useContext(HeroesContext);
-  const [results, setResults] = useState("idle");
-
-  useEffect(() => {
-    if (searchHeroes.length > 0) {
-      setResults("results");
-    } else if (searchHeroes.length === 0) {
-      setResults("noResults");
-    }
-  }, [searchHeroes]);
-
   const searchForm = useFormik({
     initialValues: {
       search: "",
@@ -73,23 +63,6 @@ const SearchForm = () => {
     dispatch({ type: heroesActions.add, payload: hero });
   };
 
-  const Results = () => {
-    return (
-      <div className="container-fluid">
-        <h2 className="sub-title">Results:</h2>
-        <div className="heroes-grid">
-          {searchHeroes.map((hero) => (
-            <SingleCard
-              key={hero.id}
-              hero={hero}
-              handleAddHero={handleAddHero}
-            />
-          ))}
-        </div>
-      </div>
-    );
-  };
-
   return (
     <div className="form-container">
       <form
@@ -126,9 +99,9 @@ const SearchForm = () => {
           Search
         </button>
       </form>
-      {results && (
-        <div className="container-fluid">
-          <h2 className="sub-title">Results:</h2>
+      <div className="container-fluid">
+        <h2 className="sub-title">Results:</h2>
+        {searchHeroes.length > 1 && (
           <div className="heroes-grid">
             {searchHeroes.map((hero) => (
               <SingleCard
@@ -138,8 +111,8 @@ const SearchForm = () => {
               />
             ))}
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
